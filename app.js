@@ -5,6 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var config = require('./config.dev');
 var mongoose = require('mongoose');
+//~line after mongoose
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
+var passport = require('passport');
 
 //Test the file
 //console.log(config);
