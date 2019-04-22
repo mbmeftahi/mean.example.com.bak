@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var config = require('./config.dev');
+var mongoose = require('mongoose');
 
 //Test the file
 //console.log(config);
@@ -25,6 +26,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+//Connect to MongoDB
+mongoose.connect(config.mongodb, { useNewUrlParser: true });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
