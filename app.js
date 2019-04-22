@@ -5,10 +5,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var config = require('./config.dev');
 var mongoose = require('mongoose');
-//~line after mongoose
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var Users = require('./models/users');
+
 
 //Test the file
 //console.log(config);
@@ -49,6 +51,8 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+passport.use(Users.createStrategy());
 
 app.use('/', indexRouter);
 app.use('/api/users', apiUsersRouter);
